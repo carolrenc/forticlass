@@ -1,4 +1,3 @@
-package youtubeAPI;
 import java.util.*;
 
 public class YoutubeMapping {

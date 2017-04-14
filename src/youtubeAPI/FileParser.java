@@ -1,9 +1,7 @@
-package youtubeAPI;
-
-
 import java.io.*;
 
 import static javafx.application.Platform.exit;
+
 /**
  * Created by ericmilton on 3/2/17.
  */
@@ -32,7 +30,7 @@ public class FileParser {
                 else{
                     if(bout == null){
                         System.out.println("PROBLEM!");
-                        //exit();
+                        exit();
                     }else{
                         System.out.println(str + " is the input string");
                         tags = scraper.findTags(getYoutubeId(str));
