@@ -1,4 +1,5 @@
 package youtubeAPI;
+
 import java.util.*;
 
 public class FortiGuardMap {
@@ -10,7 +11,7 @@ public static void main(String args[]) {
       HashMap<Integer, String> hm = new HashMap<Integer, String>();
       
       // Put elements to the map
-      
+       hm.put(1, "Film & Animation");
       hm.put(2, "Personal Vehicles"); // Youtube - Cars
       hm.put(10, "Entertainment"); //Youtube - Music
       hm.put(15, "Pets & Animals"); 

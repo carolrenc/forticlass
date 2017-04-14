@@ -1,45 +1,80 @@
-/*package youtubeAPI;
+package youtubeAPI;
 
-public enum Category {
+/**
+ * Created by ericmilton on 3/22/17.
+ */
+public class Category {
+    private String primaryCategory;
+    private String secondCategory;
+    private String thirdCategory;
+    private int primaryScore;
+    private int secondScore;
+    private int thirdScore;
+    private int totalScore;
 
-	    Cars (2),
-	    Music   (10),
-	    Pets   (15),
-	    Sports    (17),
-	    Travel (19),
-	    SATURN  (20),
-	    URANUS  (22),
-	    NEPTUNE (23),
-	    Cars1 (2),
-	    VENUS   (10),
-	    EARTH   (15),
-	    MARS    (17),
-	    JUPITER (19),
-	    SATURN  (20),
-	    URANUS  (22),
-	    NEPTUNE (23);
-/*2("Cars & Vehicles"),
-10("Music"),
-15("Pets & Animals"),
-17("Sports"),
-19("Travel & Events"),
-20("Gaming"),
-22("People & Blogs"),
-23("Comedy"),
-24("Entertainment"),
-25("News & Politics"),
-26("How-to & Style"),
-27("Education"),
-28("Science & Technology"),
-29("Non-profits & Activism");
+    Category(String primaryCategory, int primaryScore, int totalScore){
+        this.primaryCategory = primaryCategory;
+        this.primaryScore = primaryScore;
+        secondCategory = "";
+        secondScore = 0;
+        thirdCategory = "";
+        thirdScore = 0;
+        this.totalScore = totalScore;
+    }
 
-	    private final int category;   // in kilograms
-	    
-	    Category(int category) {
-	        this.category = category;
-	    }
+    Category(String primaryCategory, int primaryScore, String secondaryCategory, int secondaryScore, int totalScore){
+        this.primaryCategory = primaryCategory;
+        this.primaryScore = primaryScore;
+        this.secondCategory = secondaryCategory;
+        this.secondScore = secondaryScore;
+        thirdCategory = "";
+        thirdScore = 0;
+        this.totalScore = totalScore;
+    }
 
-	    public static void main(String[] args) {
-	        
-	    }
-}*/
+    public Category(String primaryCategory, int primaryScore, String secondaryCategory,
+                    int secondaryScore, String thirdCategory, int thirdScore, int totalScore) {
+        this.primaryCategory = primaryCategory;
+        this.secondCategory = secondaryCategory;
+        this.thirdCategory = thirdCategory;
+        this.primaryScore = primaryScore;
+        this.secondScore = secondaryScore;
+        this.thirdScore = thirdScore;
+        this.totalScore = totalScore;
+    }
+
+    public String getPrimaryCategory() {
+        return primaryCategory;
+    }
+
+    public String getSecondCategory() {
+        return secondCategory;
+    }
+
+    public int getPrimaryScore() {
+        return primaryScore;
+    }
+
+    public int getSecondScore() {
+        return secondScore;
+    }
+
+    public String getThirdCategory() {
+        return thirdCategory;
+    }
+
+    public int getThirdScore() {
+        return thirdScore;
+    }
+
+    public void print(){
+        System.out.println("Primary Category: " + primaryCategory + ", Score of " + primaryScore);
+        if(secondScore > 0){
+            System.out.println("Secondary Category: " + secondCategory + ", Score of " + secondScore);
+            if(thirdScore > 0){
+                System.out.println("Terciary Category: " + thirdCategory + ", Score of " + thirdScore);
+            }
+        }
+        System.out.println("Total Possible Score: " + totalScore);
+    }
+}

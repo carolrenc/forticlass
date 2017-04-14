@@ -9,21 +9,22 @@ public class YoutubeMapping {
     // Put elements to the map
     YoutubeMapping()
     {
+    	hm.put(1, "Film & Animation");
 	    hm.put(2, "Cars & Vehicles");
-	    hm.put(10, "Music");
+	    hm.put(10, "Music"); // some could be Nudity or Risque, Marijjuana, Alcohol, Tobacco, Lingerie and Swimsuit
 	    hm.put(15, "Pets & Animals");
-		hm.put(17, "Sports");
-		hm.put(19, "Travel & Events");
-		hm.put(20, "Gaming");
-		hm.put(22, "People & Blogs");
+		hm.put(17, "Sports"); // Sports Hunting and War Games, Sports, Games,
+		hm.put(19, "Travel & Events"); // Entertainment, Shopping, Society and Lifestyle, Travel,
+		hm.put(20, "Gaming"); // Games, [BRANCHES OFF HARD FROM HERE]
+		hm.put(22, "People & Blogs"); // Entertainment, Society and Lifestyle, [BRANCHES HARD]
 		hm.put(23, "Comedy");
 		hm.put(24, "Entertainment");
 		hm.put(25, "News & Politics");
 		hm.put(26, "How-to & Style");
-		hm.put(27, "Education");
-		hm.put(28, "Science & Technology");
+		hm.put(27, "Education"); // Education, Medicine,
+		hm.put(28, "Science & Technology"); // Education, Medicine,
 		hm.put(29, "Non-profits & Activism");
-    }
+    } // due to all the branching, this is not a valid identifier
 
    public static HashMap<Integer, String> getHm() {
 		return hm;
