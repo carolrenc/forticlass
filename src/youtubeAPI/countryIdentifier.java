@@ -1,10 +1,9 @@
 package youtubeAPI;
-import java.util.List;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import com.jaunt.Element;
-import com.jaunt.Elements;
 import com.jaunt.JauntException;
-import com.jaunt.Node;
 import com.jaunt.UserAgent;
 import com.jaunt.component.Table;
 
@@ -66,9 +65,14 @@ public class countryIdentifier {
 		return url;
 	}
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
     	//String url= "www.codecademy.com/ru/tracks/twitter";
-    	String url= "https://www.canada.ca/en.html";
+    	System.out.println("Please enter an URL: ");
+    	BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+
+    	String url= bin.readLine();
     	String cleanurl=cleanurl(url);
     	//remember to replace all slashes with %2F
     	getCountry(cleanurl);

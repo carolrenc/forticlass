@@ -1,3 +1,5 @@
+package youtubeAPI;
+
 import com.jaunt.JNode;
 import com.jaunt.JauntException;
 import com.jaunt.UserAgent;

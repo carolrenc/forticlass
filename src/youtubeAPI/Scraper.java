@@ -1,5 +1,6 @@
 package youtubeAPI;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -12,7 +13,7 @@ import twitter4j.TwitterException;
 public class Scraper {
 
 	@SuppressWarnings("rawtypes")
-	public static void main(String[] args) throws NotFound {
+	public static void main(String[] args) throws NotFound, IOException {
 
 		  try{
 			  UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
@@ -138,7 +139,7 @@ public class Scraper {
 		return null;
 	}
 	
-	static void findTweets(String query){
+	static void findTweets(String query) throws IOException{
 		try {
 			twitter.getTweets(query);
 		} catch (TwitterException e) {
