@@ -24,17 +24,12 @@ import twitter4j.conf.*;
 public class twitter {
 	static void getTweets(String searchquery) throws TwitterException, IOException{
 		
-		Properties prop=new Properties();
-		InputStream input= new FileInputStream("config.properties");
-		
-		prop.load(input);
-		
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true);
-		cb.setOAuthConsumerKey(prop.getProperty("OAuthConsumerKey"));
-		cb.setOAuthConsumerSecret(prop.getProperty("OAuthConsumerSecret"));
-		cb.setOAuthAccessToken(prop.getProperty("OAuthAccessToken"));
-		cb.setOAuthAccessTokenSecret(prop.getProperty("OAuthAccessTokenSecret"));
+		cb.setOAuthConsumerKey(new ConfigReader().configTwitter()[0]);
+		cb.setOAuthConsumerSecret(new ConfigReader().configTwitter()[1]);
+		cb.setOAuthAccessToken(new ConfigReader().configTwitter()[2]);
+		cb.setOAuthAccessTokenSecret(new ConfigReader().configTwitter()[3]);
 		  	
 		TwitterFactory tf = new TwitterFactory(cb.build());
 		Twitter twitter = tf.getInstance();
