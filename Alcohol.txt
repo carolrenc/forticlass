@@ -1,0 +1,12 @@
+alcohol
+binge drink
+vodka
+rum
+scotch
+whisky
+gin
+mead
+bourbon
+reserve
+spirit
+distill
