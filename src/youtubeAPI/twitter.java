@@ -22,42 +22,43 @@ import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.*;
 
 public class twitter {
-	static void getTweets(String searchquery) throws TwitterException, IOException{
-		
+
+	static Twitter twitter;
+
+	static void setupTwitter() throws IOException
+	{
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(true);
 		cb.setOAuthConsumerKey(new ConfigReader().configTwitter()[0]);
 		cb.setOAuthConsumerSecret(new ConfigReader().configTwitter()[1]);
 		cb.setOAuthAccessToken(new ConfigReader().configTwitter()[2]);
 		cb.setOAuthAccessTokenSecret(new ConfigReader().configTwitter()[3]);
-		  	
+
 		TwitterFactory tf = new TwitterFactory(cb.build());
-		Twitter twitter = tf.getInstance();
+		twitter = tf.getInstance();
+	}
 
-		  //Posting on Twitter
-		  /*
-		   * String latestStatus="Hounds by The Districts~~~~~~";
-		   * twitter4j.Status status = twitter.updateStatus(latestStatus);
-		   * System.out.println("Successfully updated the status to [" + status.getText() + "].");
-		  */
+	static void getTweets(String searchquery) throws TwitterException, IOException{
 
-	        try {
-	            twitter4j.Query query = new twitter4j.Query(searchquery);
-	            QueryResult result;
-	            do {
-	                result = twitter.search(query);
-	                java.util.List<twitter4j.Status> tweets = result.getTweets();
-	                for (twitter4j.Status tweet : tweets) {
-	                    System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
-	                }
-	            } while ((query = result.nextQuery()) != null);
-	            System.exit(0);
-	        } catch (TwitterException te) {
-	            te.printStackTrace();
-	            System.out.println("Failed to search tweets: " + te.getMessage());
-	            System.exit(-1);
-	        }
-		  
+		setupTwitter();
+
+		try {
+			twitter4j.Query query = new twitter4j.Query(searchquery);
+			QueryResult result;
+			do {
+				result = twitter.search(query);
+				java.util.List<twitter4j.Status> tweets = result.getTweets();
+				for (twitter4j.Status tweet : tweets) {
+					System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+				}
+			} while ((query = result.nextQuery()) != null);
+			System.exit(0);
+		} catch (TwitterException te) {
+			te.printStackTrace();
+			System.out.println("Failed to search tweets: " + te.getMessage());
+			System.exit(-1);
+		}
+
 
 	}
 	public static void main(String[] args) throws TwitterException, IOException
