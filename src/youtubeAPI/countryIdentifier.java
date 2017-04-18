@@ -11,7 +11,8 @@ public class countryIdentifier {
 	
 	public static void getCountry(String url){
 		
-		String searchUrl="https://check-host.net/ip-info?host="+url;
+		String cleanurl=cleanurl(url);
+		String searchUrl="https://check-host.net/ip-info?host="+cleanurl;
 		
         try {
             UserAgent userAgent = new UserAgent();        
@@ -69,13 +70,12 @@ public class countryIdentifier {
     	//String url= "www.codecademy.com/ru/tracks/twitter";
     	System.out.println("Please enter an URL: ");
     	BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
-    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 
     	String url= bin.readLine();
-    	String cleanurl=cleanurl(url);
+  
     	//remember to replace all slashes with %2F
-    	getCountry(cleanurl);
+    	getCountry(url);
     		
     }
 
