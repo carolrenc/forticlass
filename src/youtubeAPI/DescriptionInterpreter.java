@@ -126,6 +126,7 @@ public class DescriptionInterpreter {
         Classifier classifier = new Classifier();
 
         for(String subURL : urlsFromDesc){
+            //System.out.println(subURL);
             try{
                 if(subURL.contains("youtube") && subURL.contains("watch?v")){
                     classifications.add(classifier.classify(subURL)); // needed for YouTube
@@ -155,7 +156,6 @@ public class DescriptionInterpreter {
     DescriptionInterpreter(String url){
         getRelatedWebsites(url);
     }
-
 
     // Just for direct testing
     DescriptionInterpreter(){}

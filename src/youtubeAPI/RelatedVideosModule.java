@@ -98,33 +98,14 @@ public class RelatedVideosModule {
     }
 
     RelatedVideosModule(String video_url){
-          runRelatedClassification(video_url);
+        runRelatedClassification(video_url);
     }
 
     // Just for testing
     RelatedVideosModule(){}
 
     public static void main(String[] args){
-        String videoURL = "https://www.youtube.com/watch?v=TyQaqu2vLO0";
+        String videoURL = "https://www.youtube.com/watch?v=lnJ3RhT47T0";
         System.out.println(runRelatedClassification(videoURL));
-        /*Classifier classifier = new Classifier();
-
-        String videoId = getYoutubeId(videoURL);
-        String relatedVideos = getRelatedVideos(videoId);
-        System.out.println("Here: " + relatedVideos);
-
-        List<String> relatedVideoIds = getRelatedVideoIds(relatedVideos);
-
-        for(String relVideoId: relatedVideoIds){
-            System.out.println(relVideoId);
-            try{
-                System.out.println(
-                        classifier.classify("https://www.youtube.com/watch?v=" + relVideoId));
-            }
-            catch(Exception e){
-                System.out.println("Error in RelatedVideosModule");
-                e.printStackTrace();
-            }
-        }*/
     }
 }
