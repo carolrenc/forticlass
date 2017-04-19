@@ -21,7 +21,7 @@ import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.*;
 
-public class twitter {
+public class TwitterMod {
 
 	static Twitter twitter;
 
@@ -44,13 +44,16 @@ public class twitter {
 
 		try {
 			twitter4j.Query query = new twitter4j.Query(searchquery);
+			//query.setCount(10);
 			QueryResult result;
+			//result.
 			do {
 				result = twitter.search(query);
 				java.util.List<twitter4j.Status> tweets = result.getTweets();
 				for (twitter4j.Status tweet : tweets) {
 					System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
 				}
+				
 			} while ((query = result.nextQuery()) != null);
 			System.exit(0);
 		} catch (TwitterException te) {

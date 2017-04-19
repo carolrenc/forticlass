@@ -7,7 +7,7 @@ import com.jaunt.JauntException;
 import com.jaunt.UserAgent;
 import com.jaunt.component.Table;
 
-public class countryIdentifier {
+public class CountryIdentifier {
 	
 	public static void getCountry(String url){
 		

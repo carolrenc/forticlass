@@ -206,7 +206,7 @@ public class Scraper {
 	
 	static void getTweets(String query) throws IOException{
 		try {
-			twitter.getTweets(query);
+			TwitterMod.getTweets(query);
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
