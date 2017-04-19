@@ -63,47 +63,6 @@ public class YoutubeAccessor {
         }
     }
 
-    /*public static void getMetadata(String video_url){
-        BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
-
-        File f;  Scanner s;
-
-        StringBuilder strBuilder = new StringBuilder().append(web_version[0]).append(API_key).append(web_version[1]);
-        String video_id;
-
-        try {
-            if(video_url == "QUIT"){
-                System.out.println("Ending program");
-                return;
-            }
-            else if(video_url.contains("youtube") == false){
-                System.out.println("Not a Youtube Video, ending program");
-                return;
-            }
-
-            video_id = getYoutubeId(video_url);
-            strBuilder.append(video_id);
-
-            f = new File("YTVideo_" + video_id + ".txt");
-            BufferedWriter fileWriter = new BufferedWriter(new FileWriter(f));
-
-            //System.out.println(strBuilder.toString());
-            URL url = new URL(strBuilder.toString());
-
-            s = new Scanner(url.openStream());
-
-            // iterates it into a file
-            while(s.hasNext()) {
-                fileWriter.write(s.nextLine() + "\n");
-            }
-            s.close();
-            fileWriter.close();
-
-        } catch (Exception e) {
-
-        }
-    }*/
-
     // takes in Youtube URL and returns the videoId
     public static String getYoutubeId(String urlName){
         // System.out.println(urlName.substring(urlName.length() - 11));
