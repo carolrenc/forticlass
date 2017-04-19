@@ -10,12 +10,11 @@ public class ChannelClassifier {
 
     public static void ChannelInfo(String url){
         Scraper scraper = new Scraper();
-        //scraper.
-        String channelId = scraper.findChannelID(scraper.findYoutubeID(url));
+        String channelId = scraper.findChannelID(scraper.getYoutubeId(url));
         System.out.println(channelId);
         System.out.println();
         scraper.findChannelInfo(channelId);
-    };
+    }
 
     public static void main(String[] args){
         ChannelInfo("https://www.youtube.com/watch?v=uMChtnYO-0Y");

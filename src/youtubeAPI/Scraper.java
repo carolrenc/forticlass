@@ -116,7 +116,7 @@ public class Scraper {
 					"&part=snippet&id=" + video_id); //send request
 
 			JNode description = userAgent.json.findFirst("description");
-			System.out.println(description);
+			//System.out.println(description);
 			return description.toString();
 		}
 		catch(JauntException e){
@@ -189,22 +189,22 @@ public class Scraper {
 		return null;
 	}
 
-	// look at this later
-	String findYoutubeID(String url){
-		if(url.contains("youtube") && url.contains("watch?v")) {
-			return url.substring(url.length() - 11);
-			/*String video_id = url.substring(url.length() - 11);
-			if(video_id.length() > 11){
-				return video_id.substring(0,11);
-			} else{
-				System.out.println("Returning standard");
-				return video_id;
-			}*/
+	// look at this later - needs to be able to cut off
+	String getYoutubeId(String url){
+		if(url.contains("youtube") && url.contains("watch?v=")) {
+			String[] split_url = url.split("/");
+            for(String split_part : split_url){
+                if(split_part.contains("watch?v")){
+                    return split_part.substring(8,19);
+                }
+            }
+			//return url.substring(url.length() - 11);
 		}
 		else{
-			System.out.println("Improper video - must be youtube url");
+			System.out.println("Improper video - must be youtube video url");
 			return "ERR";
 		}
+		return "ERR";
 	}
 	
 	static void findTweets(String query) throws IOException{

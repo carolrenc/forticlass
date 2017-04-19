@@ -12,30 +12,59 @@ import java.net.Proxy;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by ericmilton on 4/4/17.
+ * This is the Description Module.
+ * Seems to work, may need more testing.
  */
 public class DescriptionInterpreter {
+    // www.ietf.org/rfc/rfc1738.txt hsa characters that are reserved
+    public static boolean isASite(String item){
+        if(item.length() < 3){
+            return false;
+        }
+        // illegal characters in strings
+        if(item.contains("{") || item.contains("}") || item.contains("|") || item.contains("~")
+                || item.contains("^") || item.contains("[") || item.contains("]") || item.contains("'"))
+            return false;
+
+        if(item.contains(".")){
+            String[] parts = item.split("\\.");
+            if(parts.length < 2)
+                return false;
+            if(item.contains("http://www.") || item.contains("https://www."))
+                return true;
+            if(item.contains(".tv") || item.contains(".gov") || item.contains(".net")
+                    || item.contains(".com") || item.contains(".nz") || item.contains(".org")
+                    || item.contains(".int") || item.contains(".edu") || item.contains(".mil")
+                    || item.contains(".uk") || item.contains("cn") || item.contains("de")
+                    || item.contains(".fr"))
+                return true;
+        }
+
+        return false;
+    }
 
     public List<String> getURLsFromDescription(String description){
         List<String> urls = new LinkedList<>();
 
         String [] parts = description.split("\\s+"); // splits up description based on spaces; URLs dont have spaces
-        System.out.println("parts.length is " + parts.length);
+        // System.out.println("parts.length is " + parts.length);
 
         // Attempt to convert each item into an URL.
         for( String item : parts ) try {
             if(item.contains("http")) {
                 URL url = new URL(item);
-                //System.out.print("<a href=\"" + url + "\">"+ url + "</a> " );
                 urls.add(item);
-                System.out.println("Item added: " + item + "\n");
+                //System.out.println("Item added: " + item + "\n");
             }else{
-                URL url = new URL(item);
-                //System.out.print("<a href=\"" + url + "\">"+ url + "</a> " );
-                urls.add(item);
-                System.out.println("Item added: " + item + "\n");
+                if(isASite(item)){
+                    urls.add(item);
+                    //System.out.println("Item added: " + item + "\n");
+                }
             }
         } catch (MalformedURLException e) {
             //System.err.println("Error in function: getURLsFromDescription");
@@ -61,7 +90,7 @@ public class DescriptionInterpreter {
                     urls.remove(i);
                     urls.add(i,expandedUrl);
                 }
-                System.out.println(urls.get(i));
+                //System.out.println(urls.get(i));
             }
         }
         catch(Exception e){
@@ -76,28 +105,10 @@ public class DescriptionInterpreter {
         return urls;
     }
 
-    // not working as intended
-    public void getReroute(String url){
-        try {
-            UserAgent userAgent = new UserAgent();         //create new userAgent (headless browser)
-            userAgent.visit("http://getlinkinfo.com");     //visit getlinkinfo
-            userAgent.doc.apply(url);            //apply form input (starting at first editable field)
-            userAgent.doc.submit("link-form");
-
-            Elements links = userAgent.doc.findEvery("<h3 class=r>").findEvery("<a>");  //find search result links
-            for(Element link : links) System.out.println(link.getAt("href"));           //print results
-
-        }catch(JauntException e){
-            System.err.println("Error in function: getReroute");
-            System.err.println(e);
-        }
-    }
-
     // actually visits site
     public static String expandUrl(String shortenedUrl) throws IOException {
         URL url = new URL(shortenedUrl);
-
-        System.out.println("Shortened URL: " + shortenedUrl);
+        //System.out.println("Shortened URL: " + shortenedUrl);
 
         // open connection
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection(Proxy.NO_PROXY);
@@ -106,65 +117,58 @@ public class DescriptionInterpreter {
         // extract location header containing the actual destination URL
         String expandedURL = httpURLConnection.getHeaderField("Location");
         httpURLConnection.disconnect();
-
         return expandedURL;
     }
 
     // https://fortiguard.com/webfilter
 
-    public void getRelatedWebsites(String url){
+    public String getRelatedWebsites(String url){
         Scraper scraper = new Scraper();
 
         String youtubeID = Classifier.getYoutubeId(url);
         List<String> urlsFromDesc = getURLsFromDescription(scraper.findDescription(youtubeID));
+        List<String> classifications = new LinkedList<>();
+        Classifier classifier = new Classifier();
 
         for(String subURL : urlsFromDesc){
             try{
-                System.out.println(FortiGuardLeverage.fortiClassify(subURL));
+                if(subURL.contains("youtube") && subURL.contains("watch?v")){
+                    classifications.add(classifier.classify(subURL)); // needed for YouTube
+                }
+                else
+                    classifications.add(FortiGuardLeverage.fortiClassify(subURL));
             } catch (Exception e){
                 System.err.println("Error in function: getRelatedWebsites");
                 e.printStackTrace();
             }
         }
+        Map<String, Long> occurrences =
+                classifications.stream().collect(Collectors.groupingBy(w  -> w, Collectors.counting()));
 
-        System.out.println("\n\nDone\n");
+        String mostFreq = "ERR";
+        int occurCount = 0;
+
+        for(String s: occurrences.keySet()){
+            if(occurrences.get(s) > occurCount) {
+                occurCount = occurrences.get(s).intValue();
+                mostFreq = s;
+            }
+        }
+        return mostFreq;
     }
 
+    DescriptionInterpreter(String url){
+        getRelatedWebsites(url);
+    }
+
+
+    // Just for direct testing
+    DescriptionInterpreter(){}
+
     public static void main(String[] args){
-        /*try{
-            URL url = new URL("twitch.tv\\/firebat"); // I thought would work but failed
-        }catch(Exception e){
-            System.out.println("Failed");
-        }*/
-
         DescriptionInterpreter de = new DescriptionInterpreter();
-        de.getRelatedWebsites("https://www.youtube.com/watch?v=pMqrMC1VZhA");
+        System.out.println(de.getRelatedWebsites("https://www.youtube.com/watch?v=pMqrMC1VZhA"));
         System.out.println("\n");
-        de.getRelatedWebsites("https://www.youtube.com/watch?v=itSTzV29bS0");
-        //System.out.println("\n\n\n\n\n");
-        //de.getRelatedWebsites(args[0]);
-        /*DescriptionInterpreter de = new DescriptionInterpreter();
-        Scraper scraper = new Scraper();
-        String description = scraper.findDescription(Classifier.getYoutubeId("https://www.youtube.com/watch?v=m1zaz3oJ3FQ"));
-        de.getURLsFromDescription(description);
-
-        System.out.println("\n\nNext video");
-        de.getURLsFromDescription("My friends at FXX (big thanks for sponsoring this video) gave me access to the Archer, " +
-                "P.I. augmented reality app that you can use to solve cases in each episode of Archer: Dreamland Season 8 " +
-                "and in the real world. Download the Archer, P.I. App here: http:\\/\\/bit.ly\\/ArcherPI and" +
-                " don’t miss the premiere of Archer: Dreamland Season 8 on Wednesday 4\\/5 on FXX.\\n\\nFollow " +
-                "me!\\n►TWITCH - http:\\/\\/www.twitch.tv\\/imaqtpie\\n►TWITTER - " +
-                "https:\\/\\/www.twitter.com\\/Imaqtpielol\\n►FACEBOOK - https:\\/\\/www.f" +
-                "acebook.com\\/imaqtpielol\\n►INSTAGRAM - https:\\/\\/www.instagram.com\\/imaq" +
-                "tpielol\\n\\nEdited By:\\n► TWITTER - https:\\/\\/twitter.com\\/2ndSequence\\n► CON" +
-                "TACT - 2econdSequence@gmail.com\\n\\nArtwork By:\\n► Twitter - https:\\/\\/twitter" +
-                ".com\\/lilyloo\\n► CONTACT - brocre8@gmail.com\\n\\nMUSIC:\\n►OUTRO: Ephixa & Stephen " +
-                "Walking - Matches (Subtact Remix) [feat. Aaron Richards] http:\\/\\/bit.ly\\/2fscGPw");
-
-        System.out.println("\n\nNext video");
-        description = scraper.findDescription(Classifier.getYoutubeId("https://www.youtube.com/watch?v=pMqrMC1VZhA"));
-        de.getURLsFromDescription(description);
-
-        System.out.println("\n");*/
+        System.out.println(de.getRelatedWebsites("https://www.youtube.com/watch?v=itSTzV29bS0"));
     }
 }
