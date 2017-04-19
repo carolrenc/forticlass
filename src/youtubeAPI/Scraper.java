@@ -169,6 +169,39 @@ public class Scraper {
 		return "ERR";
 	}
 
+    boolean checkIfReasonableChannel(String channel_id){
+        try{
+            UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
+            userAgent.sendGET("https://www.googleapis.com/youtube/v3/channels?" +
+                    "part=statistics&id=" + channel_id + "&key=" +
+                    "AIzaSyAwBpR_XiTmp7mmY3Bgzt0NGpwcLeS5M1Q"); //send request
+
+            System.out.println(userAgent.json.toString());
+
+            JNode hiddenSubscriberCount = userAgent.json.findFirst("hiddenSubscriberCount");
+            if(hiddenSubscriberCount.toString().equals("true")){
+                if(userAgent.json.findFirst("subscriberCount").toInt() < 1000){
+                    System.out.println("Too few Subscribers");
+                    return false;
+                }
+                //System.out.println("SubscriberCount:" +
+                //        userAgent.json.findFirst("subscriberCount"));
+            } else{
+                System.out.println("SubscriberCount is hidden");
+            }
+            System.out.println("VideoCount:" + userAgent.json.findFirst("videoCount"));
+            if(userAgent.json.findFirst("videoCount").toInt() < 5) {
+                System.out.println("Too few videos to trust fully without inspection");
+                return false;
+            }
+        }
+        catch(JauntException e){
+            System.err.println(e);
+        }
+
+        return true;
+    }
+
 
 	// gives related videos list
 	String[] getRelatedVideos(String video_id){
@@ -195,7 +228,7 @@ public class Scraper {
                     return split_part.substring(8,19);
                 }
             }
-			//return url.substring(url.length() - 11);
+            //return url.substring(url.length() - 11);
 		}
 		else{
 			System.out.println("Improper video - must be youtube video url");
