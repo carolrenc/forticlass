@@ -37,8 +37,8 @@ public class ChannelClassifier {
 
     public static void main(String[] args){
         //ChannelInfo("https://www.youtube.com/watch?v=uMChtnYO-0Y");
-        ChannelInfo("https://www.youtube.com/watch?v=Idiz1p8DsQE");
-        if (checkChannel("https://www.youtube.com/watch?v=Idiz1p8DsQE")){
+        ChannelInfo("https://www.youtube.com/watch?v=uVG-l8eVaB0");
+        if (checkChannel("https://www.youtube.com/watch?v=uVG-l8eVaB0")){
             System.out.println("True");
         } else {
             System.out.println("False");

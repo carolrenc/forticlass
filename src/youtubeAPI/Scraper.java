@@ -190,7 +190,7 @@ public class Scraper {
                 System.out.println("SubscriberCount is hidden");
             }
             System.out.println("VideoCount:" + userAgent.json.findFirst("videoCount"));
-            if(userAgent.json.findFirst("videoCount").toInt() < 5) {
+            if(userAgent.json.findFirst("videoCount").toInt() < 10) {
                 System.out.println("Too few videos to trust fully without inspection");
                 return false;
             }
