@@ -1,10 +1,7 @@
 package youtubeAPI;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import com.jaunt.*;
 
@@ -36,8 +33,8 @@ public class Scraper {
 			  
 			  JNode title= userAgent.json.findFirst("title");
 			  System.out.println("title: " + title);
-			  //findTweets(title.toString());
-			  findTweets(youtubeURL);
+			  //getTweets(title.toString());
+			  getTweets(youtubeURL);
 			  	
 			  }
 		  catch(JauntException e){
@@ -46,7 +43,7 @@ public class Scraper {
 	}
 
 	// case-insensitivity is important
-	String findTags(String video_id){
+	String getTags(String video_id){
 		try{
 			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
 			userAgent.sendGET("https://www.googleapis.com/youtube/v3/videos?key=" +
@@ -73,7 +70,7 @@ public class Scraper {
 		return "ERR";
 	}
 
-	String[] findTitleAndTags(String video_id){
+	String[] getTitleAndTags(String video_id){
 		String[] retList = {"",""};
 		try{
 			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
@@ -107,7 +104,7 @@ public class Scraper {
 		return retList;
 	}
 
-	String findDescription(String video_id){
+	String getDescription(String video_id){
 		try{
 			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
 			userAgent.sendGET("https://www.googleapis.com/youtube/v3/videos?key=" +
@@ -126,7 +123,7 @@ public class Scraper {
 		return "ERR";
 	}
 
-	String findChannelID(String video_id){
+	String getChannelID(String video_id){
 		try{
 			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
 			userAgent.sendGET("https://www.googleapis.com/youtube/v3/videos?key=" +
@@ -145,7 +142,7 @@ public class Scraper {
 		return "ERR";
 	}
 
-	String findChannelInfo(String channel_id){
+	String getChannelInfo(String channel_id){
 		try{
 			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
 			userAgent.sendGET("https://www.googleapis.com/youtube/v3/channels?" +
@@ -174,7 +171,7 @@ public class Scraper {
 
 
 	// gives related videos list
-	String[] findRelatedVideos(String video_id){
+	String[] getRelatedVideos(String video_id){
 		try{
 			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
 			userAgent.sendGET("https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=" +
@@ -207,7 +204,7 @@ public class Scraper {
 		return "ERR";
 	}
 	
-	static void findTweets(String query) throws IOException{
+	static void getTweets(String query) throws IOException{
 		try {
 			twitter.getTweets(query);
 		} catch (TwitterException e) {

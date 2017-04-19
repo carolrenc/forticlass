@@ -1,10 +1,5 @@
 package youtubeAPI;
 
-import com.jaunt.Element;
-import com.jaunt.Elements;
-import com.jaunt.JauntException;
-import com.jaunt.UserAgent;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -126,7 +121,7 @@ public class DescriptionInterpreter {
         Scraper scraper = new Scraper();
 
         String youtubeID = Classifier.getYoutubeId(url);
-        List<String> urlsFromDesc = getURLsFromDescription(scraper.findDescription(youtubeID));
+        List<String> urlsFromDesc = getURLsFromDescription(scraper.getDescription(youtubeID));
         List<String> classifications = new LinkedList<>();
         Classifier classifier = new Classifier();
 

@@ -72,7 +72,7 @@ public class Classifier {
     public static Category classify(String url, int x){
         LinkedList<CatValue> list = new LinkedList<CatValue>();
 
-        String[] info = scraper.findTitleAndTags(scraper.getYoutubeId(url));
+        String[] info = scraper.getTitleAndTags(scraper.getYoutubeId(url));
         if(info[0].equals("ERR")){
             System.out.println("Error detected for " + url);
             return null;
@@ -115,7 +115,7 @@ public class Classifier {
     public static String classify(String videoURL){
         LinkedList<CatValue> list = new LinkedList<CatValue>();
 
-        String[] info = scraper.findTitleAndTags(scraper.getYoutubeId(videoURL));
+        String[] info = scraper.getTitleAndTags(scraper.getYoutubeId(videoURL));
         if(info[0].equals("ERR")){
             System.out.println("Error detected for " + videoURL);
             return null;
