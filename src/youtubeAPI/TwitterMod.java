@@ -55,7 +55,7 @@ public class TwitterMod {
         return category;
     }
 
-    TwitterMod(String url){
+    public String classifyTwitterFeed(String url){
         Scraper scraper = new Scraper();
         String title = scraper.getTitle(scraper.getYoutubeId(url));
         List<String> tweets = null;
@@ -65,6 +65,11 @@ public class TwitterMod {
             e.printStackTrace();
         }
         String category = getCategoryFromTweets(tweets);
+        return category;
+    }
+
+    TwitterMod(String url){
+        classifyTwitterFeed(url);
     }
 
     TwitterMod(){}
