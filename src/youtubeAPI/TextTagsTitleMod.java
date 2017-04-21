@@ -155,6 +155,39 @@ public class TextTagsTitleMod {
         return category.getPrimaryCategory();
     }
 
+    public String classify(List<String> keywords){
+        LinkedList<CatValue> list = new LinkedList<CatValue>();
+
+        int musicScore = doComparison(keywords,musicWords);
+        int cartoonScore = doComparison(keywords,cartoonWords);
+        int gamingScore = doComparison(keywords,gameWords);
+
+        int sportsScore = doComparison(keywords,sportsWords);
+        int newsMediaScore = doComparison(keywords,newsMediaWords);
+        int artsandCultureScore = doComparison(keywords,artsandCultureWords);
+        int alcoholScore = doComparison(keywords,alcoholWords);
+        int tobaccoScore = doComparison(keywords,tobaccoWords);
+        int politicalOrganizationScore = doComparison(keywords,politicalOrganizationsWords);
+
+        addToCatValList(list,new CatValue("Music",musicScore));
+        addToCatValList(list,new CatValue("Cartoon",cartoonScore));
+
+        addToCatValList(list,new CatValue("Gaming",gamingScore));
+        addToCatValList(list,new CatValue("Sports",sportsScore));
+        addToCatValList(list,new CatValue("News and Media",newsMediaScore));
+        addToCatValList(list,new CatValue("Arts and Culture",artsandCultureScore));
+        addToCatValList(list,new CatValue("Alcohol",alcoholScore));
+        addToCatValList(list,new CatValue("Tobacco",tobaccoScore));
+        addToCatValList(list,new CatValue("Political Organizations",politicalOrganizationScore));
+
+        Category category = new Category(list.get(0).getCategoryName(), list.get(0).getCategoryValue(),
+                list.get(1).getCategoryName(), list.get(1).getCategoryValue(),
+                list.get(2).getCategoryName(), list.get(2).getCategoryValue(),
+                keywords.size()); // modify
+
+        return category.getPrimaryCategory();
+    }
+
     public static int doComparison(List<String> parsedTags, List<String> categoryListOfWords){
         int counter = 0;
 

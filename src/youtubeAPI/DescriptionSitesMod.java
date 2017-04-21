@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 public class DescriptionSitesMod {
     // www.ietf.org/rfc/rfc1738.txt hsa characters that are reserved
-    public static boolean isASite(String item){
+    private static boolean isASite(String item){
         if(item.length() < 3){
             return false;
         }
@@ -43,7 +43,7 @@ public class DescriptionSitesMod {
         return false;
     }
 
-    public List<String> getURLsFromDescription(String description){
+    private List<String> getURLsFromDescription(String description){
         List<String> urls = new LinkedList<>();
 
         String [] parts = description.split("\\s+"); // splits up description based on spaces; URLs dont have spaces
@@ -100,8 +100,8 @@ public class DescriptionSitesMod {
         return urls;
     }
 
-    // actually visits site
-    public static String expandUrl(String shortenedUrl) throws IOException {
+    // actually visits site - may want to evaluate this
+    private static String expandUrl(String shortenedUrl) throws IOException {
         URL url = new URL(shortenedUrl);
         //System.out.println("Shortened URL: " + shortenedUrl);
 
@@ -115,9 +115,7 @@ public class DescriptionSitesMod {
         return expandedURL;
     }
 
-    // https://fortiguard.com/webfilter
-
-    public String getRelatedWebsites(String url){
+    private String getRelatedWebsites(String url){
         Scraper scraper = new Scraper();
 
         String youtubeID = scraper.getYoutubeId(url);
@@ -158,7 +156,7 @@ public class DescriptionSitesMod {
     }
 
     // Just for direct testing
-    DescriptionSitesMod(){}
+    private DescriptionSitesMod(){}
 
     public static void main(String[] args){
         DescriptionSitesMod de = new DescriptionSitesMod();

@@ -70,6 +70,24 @@ public class Scraper {
 		return "ERR";
 	}
 
+	String getTitle(String video_id){
+        String[] retList = {"",""};
+        try{
+            UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
+            userAgent.sendGET("https://www.googleapis.com/youtube/v3/videos?key=" +
+                    "AIzaSyAwBpR_XiTmp7mmY3Bgzt0NGpwcLeS5M1Q&fields=items(" +
+                    "contentDetails(contentRating),snippet(title,description,tags,categoryId))" +
+                    "&part=snippet&id=" + video_id); //send request
+
+            JNode title = userAgent.json.findFirst("title");
+            return title.toString().toLowerCase();
+        }
+        catch(JauntException e){
+            System.err.println(e);
+        }
+        return "ERR";
+    }
+
 	String[] getTitleAndTags(String video_id){
 		String[] retList = {"",""};
 		try{
@@ -119,7 +137,6 @@ public class Scraper {
 		catch(JauntException e){
 			System.err.println(e);
 		}
-
 		return "ERR";
 	}
 
@@ -138,7 +155,6 @@ public class Scraper {
 		catch(JauntException e){
 			System.err.println(e);
 		}
-
 		return "ERR";
 	}
 
