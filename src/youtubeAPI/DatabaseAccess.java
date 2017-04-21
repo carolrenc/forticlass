@@ -160,10 +160,10 @@ public class DatabaseAccess {
             st1.setString(1, videoType);
             st1.setString(2, videoId);
             ResultSet rs1 = st1.executeQuery();
+            incrementAccessCount(videoType,videoId);
 
             while (rs1.next()){
                videoClassification = rs1.getString("video_classification");
-
                 i += 1;
             }
             if (i == 0)
@@ -178,5 +178,36 @@ public class DatabaseAccess {
             e.printStackTrace();
         }
         return videoClassification;
+    }
+
+    public int getVideoAccessCount(String videoType, String videoId){
+        int i = 0;  int accessCount = 0;
+        try
+        {
+            String sql1 = "SELECT *" +
+                    " FROM Videos WHERE video_type = ? " +
+                    "AND video_id = ?;\n";
+            PreparedStatement st1 = db.prepareStatement(sql1);
+            st1.setString(1, videoType);
+            st1.setString(2, videoId);
+            ResultSet rs1 = st1.executeQuery();
+
+            while (rs1.next()){
+                accessCount = rs1.getInt("access_count");
+                incrementAccessCount(videoType,videoId);
+                i += 1;
+            }
+            if (i == 0)
+            {
+                System.out.println("Video not found: " + videoType + " " + videoId);
+            }
+
+            rs1.close();
+            st1.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return accessCount;
     }
 }
