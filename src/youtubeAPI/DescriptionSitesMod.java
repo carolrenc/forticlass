@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * This is the Description Module.
  * Seems to work, may need more testing.
  */
-public class DescriptionInterpreter {
+public class DescriptionSitesMod {
     // www.ietf.org/rfc/rfc1738.txt hsa characters that are reserved
     public static boolean isASite(String item){
         if(item.length() < 3){
@@ -120,10 +120,10 @@ public class DescriptionInterpreter {
     public String getRelatedWebsites(String url){
         Scraper scraper = new Scraper();
 
-        String youtubeID = Classifier.getYoutubeId(url);
+        String youtubeID = scraper.getYoutubeId(url);
         List<String> urlsFromDesc = getURLsFromDescription(scraper.getDescription(youtubeID));
         List<String> classifications = new LinkedList<>();
-        Classifier classifier = new Classifier();
+        TextTagsTitleMod classifier = new TextTagsTitleMod();
 
         for(String subURL : urlsFromDesc){
             //System.out.println(subURL);
@@ -153,15 +153,15 @@ public class DescriptionInterpreter {
         return mostFreq;
     }
 
-    DescriptionInterpreter(String url){
+    DescriptionSitesMod(String url){
         getRelatedWebsites(url);
     }
 
     // Just for direct testing
-    DescriptionInterpreter(){}
+    DescriptionSitesMod(){}
 
     public static void main(String[] args){
-        DescriptionInterpreter de = new DescriptionInterpreter();
+        DescriptionSitesMod de = new DescriptionSitesMod();
         System.out.println(de.getRelatedWebsites("https://www.youtube.com/watch?v=pMqrMC1VZhA"));
         System.out.println("\n");
         System.out.println(de.getRelatedWebsites("https://www.youtube.com/watch?v=itSTzV29bS0"));

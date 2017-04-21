@@ -44,7 +44,7 @@ public class RelatedVideosModule {
     }
 
     public static String runRelatedClassification(String url){
-        Classifier classifier = new Classifier();
+        TextTagsTitleMod classifier = new TextTagsTitleMod();
 
         String videoId = getYoutubeId(url);
         String relatedVideos = getRelatedVideos(videoId);

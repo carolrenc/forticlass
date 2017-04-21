@@ -8,19 +8,18 @@ import java.util.*;
 /**
  * Created by ericmilton on 3/20/17.
  */
-public class Classifier {
+public class TextTagsTitleMod {
 
+    static private List<String> musicWords = null;
+    static private List<String> sportsWords = null;
+    static private List<String> cartoonWords = null;
 
-    static List<String> musicWords = null;
-    static List<String> sportsWords = null;
-    static List<String> cartoonWords = null;
-
-    static List<String> gameWords = null;
-    static List<String> artsandCultureWords = null;
-    static List<String> newsMediaWords = null;
-    static List<String> alcoholWords = null;
-    static List<String> tobaccoWords = null;
-    static List<String> politicalOrganizationsWords = null;
+    static private List<String> gameWords = null;
+    static private List<String> artsandCultureWords = null;
+    static private List<String> newsMediaWords = null;
+    static private List<String> alcoholWords = null;
+    static private List<String> tobaccoWords = null;
+    static private List<String> politicalOrganizationsWords = null;
 
     static Scraper scraper = new Scraper();
 
@@ -188,21 +187,12 @@ public class Classifier {
         return parsedTags;
     }
 
-    // converts the youtube url into just the youtube id
-    public static String getYoutubeId(String urlName){
-        if(urlName.contains("youtube") && urlName.contains("watch?v"))
-            return urlName.substring(urlName.length() - 11);
-        else{
-            System.out.println("Improper video - must be youtube url");
-            return "ERR";
-        }
-    }
     // constructor for external use
-    Classifier() {
+    TextTagsTitleMod() {
         setup();
     }
 
-    Classifier(String url){
+    TextTagsTitleMod(String url){
         setup();
         System.out.println(classify(url));
     }

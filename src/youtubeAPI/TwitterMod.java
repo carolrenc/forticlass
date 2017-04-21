@@ -39,7 +39,6 @@ public class TwitterMod {
 	}
 
 	static void getTweets(String searchquery) throws TwitterException, IOException{
-
 		setupTwitter();
 
 		try {
@@ -63,9 +62,8 @@ public class TwitterMod {
 			System.out.println("Failed to search tweets: " + te.getMessage());
 			System.exit(-1);
 		}
-
-
 	}
+
 	public static void main(String[] args) throws TwitterException, IOException
 	{
 		String searchquery="lol cats";

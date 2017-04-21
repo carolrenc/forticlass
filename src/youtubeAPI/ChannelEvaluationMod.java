@@ -6,7 +6,7 @@ package youtubeAPI;
 
 // https://developers.google.com/youtube/v3/docs/channels
 
-public class ChannelClassifier {
+public class ChannelEvaluationMod {
 
     public static boolean checkChannel(String url){
         Scraper scraper = new Scraper();
@@ -14,12 +14,12 @@ public class ChannelClassifier {
         return scraper.checkIfReasonableChannel(channelId);
     }
 
-    ChannelClassifier(String url){
+    ChannelEvaluationMod(String url){
         checkChannel(url);
     }
 
     // Under here is just for testing
-    ChannelClassifier(){}
+    ChannelEvaluationMod(){}
 
     public static void ChannelInfo(String url){
         Scraper scraper = new Scraper();
