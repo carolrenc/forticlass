@@ -39,7 +39,8 @@ public class TwitterMod {
             int tweetsSize=tweets.size();
             for (int i=0; i<10 && i<tweetsSize; i++) {
                 twitter4j.Status tweet= tweets.get(i);
-                list.add("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
+                list.add("@" + tweet.getUser().getScreenName().toLowerCase()
+                        + " - " + tweet.getText().toLowerCase());
             }
 		} catch (TwitterException te) {
 			te.printStackTrace();
@@ -48,14 +49,12 @@ public class TwitterMod {
 		return list;
 	}
 
-	static String getCategoryFromTweets(List<String> tweets){
+	private static String getCategoryFromTweets(List<String> tweets){
 	    TextTagsTitleMod classifier = new TextTagsTitleMod();
-        String category = classifier.classify(tweets);
-        System.out.println(category + " is the category.");
-        return category;
+        return classifier.classify(tweets);
     }
 
-    public String classifyTwitterFeed(String url){
+    private static String classifyTwitterFeed(String url){
         Scraper scraper = new Scraper();
         String title = scraper.getTitle(scraper.getYoutubeId(url));
         List<String> tweets = null;
@@ -65,6 +64,7 @@ public class TwitterMod {
             e.printStackTrace();
         }
         String category = getCategoryFromTweets(tweets);
+        System.out.println(category);
         return category;
     }
 
@@ -74,10 +74,10 @@ public class TwitterMod {
 
     TwitterMod(){}
 
-	public static void main(String[] args) throws TwitterException, IOException
-	{
-		String searchquery="Chronicles of Narnia";
+	public static void main(String[] args) throws TwitterException, IOException {
+		/*String searchquery="Chronicles of Narnia";
 		List<String> tweets = getTweets(searchquery);
-        getCategoryFromTweets(tweets);
+        getCategoryFromTweets(tweets);*/
+		classifyTwitterFeed("https://www.youtube.com/watch?v=qxKGB13nPCs");
 	}
 }
