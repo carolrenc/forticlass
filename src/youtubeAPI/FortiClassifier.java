@@ -15,7 +15,6 @@ import com.jaunt.component.Form;
 public class FortiClassifier {
 
 	public static String fortiClassify(String URL) throws JauntException {
-		// TODO Auto-generated method stub
 		// go to fortiguard url
 		// obtain classification
 		// return classification

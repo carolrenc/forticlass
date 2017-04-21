@@ -14,7 +14,8 @@ import com.jaunt.UserAgent;
  *
  */
 public class GoogleSearchClassification {
-	
+
+
 	public static String cleanURL(String str) {
 		int start = 0, end = 0;
 		if ((str.contains("www.") || str.contains("http://") || str.contains("https://")) && (str.contains(".com") || str.contains(".net") || str.contains(".org"))) {

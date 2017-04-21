@@ -11,17 +11,27 @@ import com.jaunt.JauntException;
  */
 public class GoogleSearchMod {
 	
-	/**
-	 * @param args
-	 */
+	public static void getClassification(String video_url){
+	    Scraper scraper = new Scraper();
+        String category = null;
+	    try{
+	        category = GoogleSearchClassification.classify(scraper.getTitle(video_url));
+        } catch(JauntException e){
+            e.printStackTrace();
+        }
+
+        System.out.println(category);
+        //SARA DO THIS
+    }
+
+	GoogleSearchMod(){}
+
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		try {
 			String result;
 			result = GoogleSearchClassification.classify("Benjamin Zander");
 			System.out.print("\n\nFinal Classification: " + result);
 		} catch (JauntException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
