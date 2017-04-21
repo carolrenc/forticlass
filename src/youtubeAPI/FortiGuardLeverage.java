@@ -10,7 +10,6 @@ import com.jaunt.component.Form;
  */
 public class FortiGuardLeverage {
     public static String fortiClassify(String URL) throws JauntException {
-        // TODO Auto-generated method stub
         // go to fortiguard url
         // obtain classification
         // return classification
