@@ -156,10 +156,6 @@ public class DescriptionSitesMod {
         // SARA DO THIS
     }
 
-    DescriptionSitesMod(String url){
-        getRelatedWebsites(url);
-    }
-
     // Just for direct testing
     private DescriptionSitesMod(){}
 

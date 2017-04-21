@@ -10,3 +10,8 @@ bourbon
 reserve
 spirit
 distill
+red wine
+white wine
+spiced rum
+tequila
+don julio

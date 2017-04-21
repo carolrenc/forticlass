@@ -20,7 +20,6 @@ track and field
 deadlift
 bodybuild
 snooker
-pool
 ultimate frisbee
 basketball
 fifa
@@ -37,7 +36,6 @@ david beckham
 ronaldinho
 wayne gretzky
 exhibition
-match
 playoff
 plays
 heads up

@@ -14,11 +14,16 @@ public class ChannelEvaluationMod {
         return scraper.checkIfReasonableChannel(channelId);
     }
 
+    public static void getClassification(String video_url){
+        boolean validChannel = checkChannel(video_url);
+
+        // SARA DO THIS - this one is different bc it returns if a channel is reasonable or not
+    }
+
     ChannelEvaluationMod(String url){
         checkChannel(url);
     }
 
-    // Under here is just for testing
     ChannelEvaluationMod(){}
 
     public static void ChannelInfo(String url){
@@ -30,7 +35,7 @@ public class ChannelEvaluationMod {
 
         if(scraper.checkIfReasonableChannel(channelId)){
             System.out.println("Trustable");
-        }else{
+        } else {
             System.out.println("Not Necessarily");
         }
     }

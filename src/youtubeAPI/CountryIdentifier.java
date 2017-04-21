@@ -71,7 +71,6 @@ public class CountryIdentifier {
     	System.out.println("Please enter an URL: ");
     	BufferedReader bin = new BufferedReader(new InputStreamReader(System.in));
 
-
     	String url= bin.readLine();
   
     	//remember to replace all slashes with %2F

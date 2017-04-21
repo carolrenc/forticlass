@@ -37,10 +37,11 @@ public class TwitterMod {
             result = twitter.search(query);
             java.util.List<twitter4j.Status> tweets = result.getTweets();
             int tweetsSize=tweets.size();
-            for (int i=0; i<10 && i<tweetsSize; i++) {
+            for (int i=0; i<25 && i<tweetsSize; i++) {
                 twitter4j.Status tweet= tweets.get(i);
-                list.add("@" + tweet.getUser().getScreenName().toLowerCase()
-                        + " - " + tweet.getText().toLowerCase());
+                System.out.println(/*"@" + tweet.getUser().getScreenName().toLowerCase()
+                        + " - " + */tweet.getText().toLowerCase());
+                list.add(tweet.getText().toLowerCase());
             }
 		} catch (TwitterException te) {
 			te.printStackTrace();
@@ -69,7 +70,7 @@ public class TwitterMod {
     }
 
     public static void getClassification(String video_url){
-        classifyTwitterFeed(video_url);
+        String category = classifyTwitterFeed(video_url);
 
         // SARA DO THIS
     }
@@ -81,5 +82,8 @@ public class TwitterMod {
 		List<String> tweets = getTweets(searchquery);
         getCategoryFromTweets(tweets);*/
 		classifyTwitterFeed("https://www.youtube.com/watch?v=qxKGB13nPCs");
+
+        System.out.println("\n\n");
+        classifyTwitterFeed("https://www.youtube.com/watch?v=A9294exNvJQ");
 	}
 }
