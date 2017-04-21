@@ -50,10 +50,12 @@ public class TwitterMod {
 			do {
 				result = twitter.search(query);
 				java.util.List<twitter4j.Status> tweets = result.getTweets();
-				for (twitter4j.Status tweet : tweets) {
+				int tweetsSize=tweets.size();
+				for (int i=0; i<1000 && i<tweetsSize; i++) {
+					twitter4j.Status tweet= tweets.get(i);
 					System.out.println("@" + tweet.getUser().getScreenName() + " - " + tweet.getText());
 				}
-				
+						
 			} while ((query = result.nextQuery()) != null);
 			System.exit(0);
 		} catch (TwitterException te) {
