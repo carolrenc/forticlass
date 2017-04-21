@@ -123,36 +123,46 @@ public class TextTagsTitleMod {
         List<String> parsedTags = parseTags(info[1]);
         parsedTags.add(info[0]);
 
-        int musicScore = doComparison(parsedTags,musicWords);
-        int cartoonScore = doComparison(parsedTags,cartoonWords);
-        int gamingScore = doComparison(parsedTags,gameWords);
+        System.out.println("Printing Tags and Title");
+        for(String word:parsedTags){
+            System.out.println(word);
+        }
+        System.out.println("Done printing Tags and Title");
 
-        int sportsScore = doComparison(parsedTags,sportsWords);
-        int newsMediaScore = doComparison(parsedTags,newsMediaWords);
-        int artsandCultureScore = doComparison(parsedTags,artsandCultureWords);
-        int alcoholScore = doComparison(parsedTags,alcoholWords);
-        int tobaccoScore = doComparison(parsedTags,tobaccoWords);
-        int politicalOrganizationScore = doComparison(parsedTags,politicalOrganizationsWords);
+        if(parsedTags != null) {
 
-        addToCatValList(list,new CatValue("Music",musicScore));
-        addToCatValList(list,new CatValue("Cartoon",cartoonScore));
+            int musicScore = doComparison(parsedTags, musicWords);
+            int cartoonScore = doComparison(parsedTags, cartoonWords);
+            int gamingScore = doComparison(parsedTags, gameWords);
 
-        addToCatValList(list,new CatValue("Gaming",gamingScore));
-        addToCatValList(list,new CatValue("Sports",sportsScore));
-        addToCatValList(list,new CatValue("News and Media",newsMediaScore));
-        addToCatValList(list,new CatValue("Arts and Culture",artsandCultureScore));
-        addToCatValList(list,new CatValue("Alcohol",alcoholScore));
-        addToCatValList(list,new CatValue("Tobacco",tobaccoScore));
-        addToCatValList(list,new CatValue("Political Organizations",politicalOrganizationScore));
+            int sportsScore = doComparison(parsedTags, sportsWords);
+            int newsMediaScore = doComparison(parsedTags, newsMediaWords);
+            int artsandCultureScore = doComparison(parsedTags, artsandCultureWords);
+            int alcoholScore = doComparison(parsedTags, alcoholWords);
+            int tobaccoScore = doComparison(parsedTags, tobaccoWords);
+            int politicalOrganizationScore = doComparison(parsedTags, politicalOrganizationsWords);
 
-        // System.out.println("Title:" + info[0]);
+            addToCatValList(list, new CatValue("Music", musicScore));
+            addToCatValList(list, new CatValue("Cartoon", cartoonScore));
 
-        Category category = new Category(list.get(0).getCategoryName(), list.get(0).getCategoryValue(),
-                list.get(1).getCategoryName(), list.get(1).getCategoryValue(),
-                list.get(2).getCategoryName(), list.get(2).getCategoryValue(),
-                parsedTags.size()); // modify
+            addToCatValList(list, new CatValue("Gaming", gamingScore));
+            addToCatValList(list, new CatValue("Sports", sportsScore));
+            addToCatValList(list, new CatValue("News and Media", newsMediaScore));
+            addToCatValList(list, new CatValue("Arts and Culture", artsandCultureScore));
+            addToCatValList(list, new CatValue("Alcohol", alcoholScore));
+            addToCatValList(list, new CatValue("Tobacco", tobaccoScore));
+            addToCatValList(list, new CatValue("Political Organizations", politicalOrganizationScore));
 
-        return category.getPrimaryCategory();
+            Category category = new Category(list.get(0).getCategoryName(), list.get(0).getCategoryValue(),
+                    list.get(1).getCategoryName(), list.get(1).getCategoryValue(),
+                    list.get(2).getCategoryName(), list.get(2).getCategoryValue(),
+                    parsedTags.size()); // modify
+
+            return category.getPrimaryCategory();
+        } else{
+            System.out.println("NULL ISSUE IN TEXTTITLTETAGESFD");
+            return "ERR";
+        }
     }
 
     public String classify(List<String> keywords){
@@ -220,18 +230,21 @@ public class TextTagsTitleMod {
         return parsedTags;
     }
 
-    // constructor for external use
-    TextTagsTitleMod() {
-        setup();
+    public static void getClassification(String video_url){
+        String category = classify(video_url);
+
+        // SARA DO THIS
     }
 
-    TextTagsTitleMod(String url){
+    TextTagsTitleMod() {
         setup();
-        System.out.println(classify(url));
     }
 
     public static void main(String[] args) {
         setup();
         System.out.println(classify("https://www.youtube.com/watch?v=m1zaz3oJ3FQ"));
+
+        System.out.println("\n\n\n");
+        System.out.println(classify("https://www.youtube.com/watch?v=itSTzV29bS0"));
     }
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Created by ericmilton on 4/10/17.
  */
-public class RelatedVideosModule {
+public class RelatedVideosMod {
     public static String getYoutubeId(String urlName){
         if(urlName.contains("youtube") && urlName.contains("watch?v"))
             return urlName.substring(urlName.length() - 11);
@@ -44,8 +44,6 @@ public class RelatedVideosModule {
     }
 
     public static String runRelatedClassification(String url){
-        TextTagsTitleMod classifier = new TextTagsTitleMod();
-
         String videoId = getYoutubeId(url);
         String relatedVideos = getRelatedVideos(videoId);
         //System.out.println("Here: " + relatedVideos);
@@ -57,10 +55,10 @@ public class RelatedVideosModule {
             //System.out.println(relVideoId);
             try{
                 classifications.add(
-                        classifier.classify("https://www.youtube.com/watch?v=" + relVideoId));
+                        TextTagsTitleMod.classify("https://www.youtube.com/watch?v=" + relVideoId));
             }
             catch(Exception e){
-                System.out.println("Error in RelatedVideosModule");
+                System.out.println("Error in RelatedVideosMod");
                 e.printStackTrace();
             }
         }
@@ -97,12 +95,13 @@ public class RelatedVideosModule {
         return null;
     }
 
-    RelatedVideosModule(String video_url){
-        runRelatedClassification(video_url);
+    public static void getClassification(String video_url){
+        String category = runRelatedClassification(video_url);
+
+        // SARA STUFF HERE
     }
 
-    // Just for testing
-    RelatedVideosModule(){}
+    RelatedVideosMod(){}
 
     public static void main(String[] args){
         String videoURL = "https://www.youtube.com/watch?v=lnJ3RhT47T0";

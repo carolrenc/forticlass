@@ -43,7 +43,7 @@ public class DescriptionSitesMod {
         return false;
     }
 
-    private List<String> getURLsFromDescription(String description){
+    private static List<String> getURLsFromDescription(String description){
         List<String> urls = new LinkedList<>();
 
         String [] parts = description.split("\\s+"); // splits up description based on spaces; URLs dont have spaces
@@ -115,19 +115,18 @@ public class DescriptionSitesMod {
         return expandedURL;
     }
 
-    private String getRelatedWebsites(String url){
+    private static String getRelatedWebsites(String url){
         Scraper scraper = new Scraper();
 
         String youtubeID = scraper.getYoutubeId(url);
         List<String> urlsFromDesc = getURLsFromDescription(scraper.getDescription(youtubeID));
         List<String> classifications = new LinkedList<>();
-        TextTagsTitleMod classifier = new TextTagsTitleMod();
 
         for(String subURL : urlsFromDesc){
             //System.out.println(subURL);
             try{
                 if(subURL.contains("youtube") && subURL.contains("watch?v")){
-                    classifications.add(classifier.classify(subURL)); // needed for YouTube
+                    classifications.add(TextTagsTitleMod.classify(subURL)); // needed for YouTube
                 }
                 else
                     classifications.add(FortiGuardLeverage.fortiClassify(subURL));
@@ -151,6 +150,12 @@ public class DescriptionSitesMod {
         return mostFreq;
     }
 
+    public static void getClassification(String video_url){
+        String category = getRelatedWebsites(video_url);
+
+        // SARA DO THIS
+    }
+
     DescriptionSitesMod(String url){
         getRelatedWebsites(url);
     }
@@ -163,5 +168,8 @@ public class DescriptionSitesMod {
         System.out.println(de.getRelatedWebsites("https://www.youtube.com/watch?v=pMqrMC1VZhA"));
         System.out.println("\n");
         System.out.println(de.getRelatedWebsites("https://www.youtube.com/watch?v=itSTzV29bS0"));
+
+
+        getClassification("https://www.youtube.com/watch?v=og9_51uRKsQ");
     }
 }

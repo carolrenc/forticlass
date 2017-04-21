@@ -68,8 +68,10 @@ public class TwitterMod {
         return category;
     }
 
-    TwitterMod(String url){
-        classifyTwitterFeed(url);
+    public static void getClassification(String video_url){
+        classifyTwitterFeed(video_url);
+
+        // SARA DO THIS
     }
 
     TwitterMod(){}
