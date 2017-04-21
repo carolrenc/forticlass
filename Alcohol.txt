@@ -1,10 +1,9 @@
 alcohol
 binge drink
 vodka
-rum
 scotch
 whisky
-gin
+tanqueray gin
 mead
 bourbon
 reserve
@@ -15,3 +14,5 @@ white wine
 spiced rum
 tequila
 don julio
+margarita
+mixology

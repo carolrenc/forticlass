@@ -1,14 +1,18 @@
 package youtubeAPI;
 
 import com.jaunt.Element;
+import com.jaunt.Elements;
 import com.jaunt.JauntException;
 import com.jaunt.UserAgent;
 import com.jaunt.component.Form;
+
+import java.util.HashMap;
 
 /**
  * Created by ericmilton on 4/10/17.
  */
 public class FortiGuardLeverage {
+
     public static String fortiClassify(String URL) throws JauntException {
         // go to fortiguard url
         // obtain classification

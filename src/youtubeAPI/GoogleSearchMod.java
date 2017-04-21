@@ -10,7 +10,7 @@ import com.jaunt.JauntException;
  *
  */
 public class GoogleSearchMod {
-	
+
 	public static void getClassification(String video_url){
 	    Scraper scraper = new Scraper();
         String category = null;
