@@ -10,24 +10,29 @@ import java.util.*;
  */
 public class TextTagsTitleMod {
 
-    static private List<String> musicWords = null;
-    static private List<String> sportsWords = null;
-    static private List<String> cartoonWords = null;
+    //static private List<String> musicWords = null;
+    //static private List<String> cartoonWords = null;
 
+    static private List<String> sportsWords = null;
     static private List<String> gameWords = null;
     static private List<String> artsandCultureWords = null;
     static private List<String> newsMediaWords = null;
     static private List<String> alcoholWords = null;
     static private List<String> tobaccoWords = null;
     static private List<String> politicalOrganizationsWords = null;
+    static private List<String> abortionWords = null;
+    static private List<String> advocacyOrganizationWords = null;
+    static private List<String> alternativeBeliefWords = null;
+    static private List<String> armedForcesWords = null;
+    static private List<String> marijuanaWords = null;
+    static private List<String> sexEducationWords = null;
 
     static Scraper scraper = new Scraper();
 
     // uses populateList to fill each of the categorization lists
     public static void setup(){
-        musicWords = populateList("music.txt");
-        cartoonWords = populateList("cartoon.txt");
-
+        //musicWords = populateList("music.txt");
+        //cartoonWords = populateList("cartoon.txt");
 
         gameWords = populateList("Games.txt");
         sportsWords = populateList("Sports.txt");
@@ -36,6 +41,12 @@ public class TextTagsTitleMod {
         alcoholWords = populateList("Alcohol.txt");
         tobaccoWords = populateList("Tobacco.txt");
         politicalOrganizationsWords = populateList("PoliticalOrganizations.txt");
+        advocacyOrganizationWords = populateList("AdvocacyOrganizations.txt");
+        abortionWords = populateList("Abortion.txt");
+        alternativeBeliefWords = populateList("AlternativeBeliefs.txt");
+        armedForcesWords = populateList("ArmedForces.txt");
+        marijuanaWords = populateList("Marijuana.txt");
+        sexEducationWords = populateList("SexEducation.txt");
     }
 
     // working as intended
@@ -68,49 +79,6 @@ public class TextTagsTitleMod {
         return;
     }
 
-    public static Category classify(String url, int x){
-        LinkedList<CatValue> list = new LinkedList<CatValue>();
-
-        String[] info = scraper.getTitleAndTags(scraper.getYoutubeId(url));
-        if(info[0].equals("ERR")){
-            System.out.println("Error detected for " + url);
-            return null;
-        }
-
-        List<String> parsedTags = parseTags(info[1]);
-        parsedTags.add(info[0]);
-
-        int musicScore = doComparison(parsedTags,musicWords);
-        int cartoonScore = doComparison(parsedTags,cartoonWords);
-        int gamingScore = doComparison(parsedTags,gameWords);
-
-        int sportsScore = doComparison(parsedTags,sportsWords);
-        int newsMediaScore = doComparison(parsedTags,newsMediaWords);
-        int artsandCultureScore = doComparison(parsedTags,artsandCultureWords);
-        int alcoholScore = doComparison(parsedTags,alcoholWords);
-        int tobaccoScore = doComparison(parsedTags,tobaccoWords);
-        int politicalOrganizationScore = doComparison(parsedTags,politicalOrganizationsWords);
-
-        addToCatValList(list,new CatValue("Music",musicScore));
-        addToCatValList(list,new CatValue("Cartoon",cartoonScore));
-
-        addToCatValList(list,new CatValue("Gaming",gamingScore));
-        addToCatValList(list,new CatValue("Sports",sportsScore));
-        addToCatValList(list,new CatValue("News and Media",newsMediaScore));
-        addToCatValList(list,new CatValue("Arts and Culture",artsandCultureScore));
-        addToCatValList(list,new CatValue("Alcohol",alcoholScore));
-        addToCatValList(list,new CatValue("Tobacco",tobaccoScore));
-        addToCatValList(list,new CatValue("Political Organizations",politicalOrganizationScore));
-
-        System.out.println("\n" + info[0]);
-        Category category = new Category(list.get(0).getCategoryName(), list.get(0).getCategoryValue(),
-                list.get(1).getCategoryName(), list.get(1).getCategoryValue(),
-                list.get(2).getCategoryName(), list.get(2).getCategoryValue(),
-                parsedTags.size()); // modify
-        return category;
-    }
-
-    // RUN THIS
     public static String classify(String videoURL){
         LinkedList<CatValue> list = new LinkedList<CatValue>();
 
@@ -131,8 +99,8 @@ public class TextTagsTitleMod {
 
         if(parsedTags != null) {
 
-            int musicScore = doComparison(parsedTags, musicWords);
-            int cartoonScore = doComparison(parsedTags, cartoonWords);
+            //int musicScore = doComparison(parsedTags, musicWords);
+            //int cartoonScore = doComparison(parsedTags, cartoonWords);
             int gamingScore = doComparison(parsedTags, gameWords);
 
             int sportsScore = doComparison(parsedTags, sportsWords);
@@ -141,9 +109,15 @@ public class TextTagsTitleMod {
             int alcoholScore = doComparison(parsedTags, alcoholWords);
             int tobaccoScore = doComparison(parsedTags, tobaccoWords);
             int politicalOrganizationScore = doComparison(parsedTags, politicalOrganizationsWords);
+            int advocacyOrganizationScore = doComparison(parsedTags, advocacyOrganizationWords);
+            int abortionScore = doComparison(parsedTags, abortionWords);
+            int alternativeBeliefScore = doComparison(parsedTags, alternativeBeliefWords);
+            int armedForcesScore = doComparison(parsedTags, armedForcesWords);
+            int marijuanaScore = doComparison(parsedTags, marijuanaWords);
+            int sexEducationScore = doComparison(parsedTags, sexEducationWords);
 
-            addToCatValList(list, new CatValue("Music", musicScore));
-            addToCatValList(list, new CatValue("Cartoon", cartoonScore));
+            //addToCatValList(list, new CatValue("Music", musicScore));
+            //addToCatValList(list, new CatValue("Cartoon", cartoonScore));
 
             addToCatValList(list, new CatValue("Gaming", gamingScore));
             addToCatValList(list, new CatValue("Sports", sportsScore));
@@ -152,6 +126,13 @@ public class TextTagsTitleMod {
             addToCatValList(list, new CatValue("Alcohol", alcoholScore));
             addToCatValList(list, new CatValue("Tobacco", tobaccoScore));
             addToCatValList(list, new CatValue("Political Organizations", politicalOrganizationScore));
+            addToCatValList(list, new CatValue("Advocacy Organizations", advocacyOrganizationScore));
+            addToCatValList(list, new CatValue("Abortion", abortionScore));
+            addToCatValList(list, new CatValue("Alternative Beliefs", alternativeBeliefScore));
+            addToCatValList(list, new CatValue("Armed Forces", armedForcesScore));
+            addToCatValList(list, new CatValue("Marijuana", marijuanaScore));
+            addToCatValList(list, new CatValue("Sex Education", sexEducationScore));
+
 
             Category category = new Category(list.get(0).getCategoryName(), list.get(0).getCategoryValue(),
                     list.get(1).getCategoryName(), list.get(1).getCategoryValue(),
@@ -168,8 +149,6 @@ public class TextTagsTitleMod {
     public String classify(List<String> keywords){
         LinkedList<CatValue> list = new LinkedList<CatValue>();
 
-        int musicScore = doComparison(keywords,musicWords);
-        int cartoonScore = doComparison(keywords,cartoonWords);
         int gamingScore = doComparison(keywords,gameWords);
 
         int sportsScore = doComparison(keywords,sportsWords);
@@ -178,9 +157,12 @@ public class TextTagsTitleMod {
         int alcoholScore = doComparison(keywords,alcoholWords);
         int tobaccoScore = doComparison(keywords,tobaccoWords);
         int politicalOrganizationScore = doComparison(keywords,politicalOrganizationsWords);
-
-        addToCatValList(list,new CatValue("Music",musicScore));
-        addToCatValList(list,new CatValue("Cartoon",cartoonScore));
+        int advocacyOrganizationScore = doComparison(keywords, advocacyOrganizationWords);
+        int abortionScore = doComparison(keywords, abortionWords);
+        int alternativeBeliefScore = doComparison(keywords, alternativeBeliefWords);
+        int armedForcesScore = doComparison(keywords, armedForcesWords);
+        int marijuanaScore = doComparison(keywords, marijuanaWords);
+        int sexEducationScore = doComparison(keywords, sexEducationWords);
 
         addToCatValList(list,new CatValue("Gaming",gamingScore));
         addToCatValList(list,new CatValue("Sports",sportsScore));
@@ -189,6 +171,12 @@ public class TextTagsTitleMod {
         addToCatValList(list,new CatValue("Alcohol",alcoholScore));
         addToCatValList(list,new CatValue("Tobacco",tobaccoScore));
         addToCatValList(list,new CatValue("Political Organizations",politicalOrganizationScore));
+        addToCatValList(list, new CatValue("Advocacy Organizations", advocacyOrganizationScore));
+        addToCatValList(list, new CatValue("Abortion", abortionScore));
+        addToCatValList(list, new CatValue("Alternative Beliefs", alternativeBeliefScore));
+        addToCatValList(list, new CatValue("Armed Forces", armedForcesScore));
+        addToCatValList(list, new CatValue("Marijuana", marijuanaScore));
+        addToCatValList(list, new CatValue("Sex Education", sexEducationScore));
 
         Category category = new Category(list.get(0).getCategoryName(), list.get(0).getCategoryValue(),
                 list.get(1).getCategoryName(), list.get(1).getCategoryValue(),
