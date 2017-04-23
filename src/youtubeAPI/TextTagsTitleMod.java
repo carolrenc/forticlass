@@ -119,7 +119,7 @@ public class TextTagsTitleMod {
             //addToCatValList(list, new CatValue("Music", musicScore));
             //addToCatValList(list, new CatValue("Cartoon", cartoonScore));
 
-            addToCatValList(list, new CatValue("Gaming", gamingScore));
+            addToCatValList(list, new CatValue("Games", gamingScore));
             addToCatValList(list, new CatValue("Sports", sportsScore));
             addToCatValList(list, new CatValue("News and Media", newsMediaScore));
             addToCatValList(list, new CatValue("Arts and Culture", artsandCultureScore));

@@ -143,7 +143,7 @@ public class DescriptionSitesMod {
         Map<String, Long> occurrences =
                 classifications.stream().collect(Collectors.groupingBy(w  -> w, Collectors.counting()));
 
-        String mostFreq = "ERR";
+        String mostFreq = "NA";
         int occurCount = 0;
 
         for(String s: occurrences.keySet()){
