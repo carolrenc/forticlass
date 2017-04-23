@@ -59,29 +59,6 @@ public class DatabaseAccess {
         }
     }
 
-    public void createTestTable() {
-        try
-        {
-            String sql = "CREATE TABLE public.test\n" +
-                    "(\n" +
-                    "test_id serial NOT NULL,\n" +
-                    "name character varying(70) NOT NULL\n" +
-                    ")\n" +
-                    "WITH (\n" +
-                    "OIDS = FALSE\n" +
-                    ")\n" +
-                    ";\n" +
-                    "ALTER TABLE public.test\n" +
-                    "OWNER TO postgres;";
-            Statement st = db.createStatement();
-            st.execute(sql);
-            st.close();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
     public void createVideosTable(){
         try{
             String sqlS = "CREATE TABLE IF NOT EXISTS Videos\n"
@@ -105,8 +82,8 @@ public class DatabaseAccess {
     public void putVideoEntry(String videoType, String videoId){
         try{
             String sql = "INSERT INTO Videos\n" +
-                    "(video_type, video_id, access_count) VALUES \n" +
-                    "(?,?,0);\n";
+                    "(video_type, video_id, access_count, video_classification) VALUES \n" +
+                    "(?,?,0,'NA');\n";
             PreparedStatement st = db.prepareStatement(sql);
             st.setString(1,videoType);
             st.setString(2,videoId);
@@ -132,25 +109,27 @@ public class DatabaseAccess {
         }
     }
 
-    public void updateVideoEntry(String videoClassification, String videoId){
+    public void updateVideoEntry(String videoClassification, String videoType,
+                                 String videoId){
         try
         {
             String sql = "UPDATE Videos\n" +
                     "SET video_classification = ? " +
-                    "WHERE video_id = ?;\n";
+                    "WHERE video_id = ? AND video_type = ?;\n";
             PreparedStatement st = db.prepareStatement(sql);
             st.setString(1, videoClassification);
             st.setString(2, videoId);
+            st.setString(3, videoType);
             st.execute();
             st.close();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
+    // if NA, then not existent
     public String getVideoClassification(String videoType, String videoId){
-        int i = 0;  String videoClassification = null;
+        int i = 0;  String videoClassification = "NA";
         try
         {
             String sql1 = "SELECT *" +
@@ -165,16 +144,16 @@ public class DatabaseAccess {
             while (rs1.next()){
                videoClassification = rs1.getString("video_classification");
                 i += 1;
+                incrementAccessCount(videoType, videoId); // increments if found
             }
             if (i == 0)
             {
-                System.out.println("Video not found: " + videoType + " " + videoId);
+                //System.out.println("Video not found: " + videoType + " " + videoId);
             }
 
             rs1.close();
             st1.close();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return videoClassification;
