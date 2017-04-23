@@ -61,16 +61,16 @@ public class GoogleSearchClassification {
 			userAgent.visit(href);
 			Element link = userAgent.doc.findFirst("<div class=\"_jFe\">").findFirst("<a>");
 			URL = link.getText();
-			System.out.println(URL);
+			//System.out.println(URL);
 			URL = cleanURL(URL);
-			System.out.println(URL);
+			//System.out.println(URL);
 
 			if (URL.equals("")) {
 				continue;
 			}
 
 			result = FortiGuardLeverage.fortiClassify(URL);
-			System.out.println(result + "\n");
+			//System.out.println(result + "\n");
 			if (result.equals("Search Engines and Portals")) {
 				continue;
 			}

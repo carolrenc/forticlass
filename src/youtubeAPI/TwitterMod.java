@@ -39,8 +39,8 @@ public class TwitterMod {
             int tweetsSize=tweets.size();
             for (int i=0; i<25 && i<tweetsSize; i++) {
                 twitter4j.Status tweet= tweets.get(i);
-                System.out.println(/*"@" + tweet.getUser().getScreenName().toLowerCase()
-                        + " - " + */tweet.getText().toLowerCase());
+                //System.out.println(/*"@" + tweet.getUser().getScreenName().toLowerCase()
+                //        + " - " + */tweet.getText().toLowerCase());
                 list.add(tweet.getText().toLowerCase());
             }
 		} catch (TwitterException te) {
@@ -65,7 +65,6 @@ public class TwitterMod {
             e.printStackTrace();
         }
         String category = getCategoryFromTweets(tweets);
-        System.out.println(category);
         return category;
     }
 

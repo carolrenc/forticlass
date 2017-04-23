@@ -2,6 +2,7 @@ alcohol
 binge drink
 vodka
 scotch
+whiskey
 whisky
 tanqueray gin
 mead

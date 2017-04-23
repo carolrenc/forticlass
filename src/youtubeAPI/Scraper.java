@@ -79,7 +79,9 @@ public class Scraper {
                     "contentDetails(contentRating),snippet(title,description,tags,categoryId))" +
                     "&part=snippet&id=" + video_id); //send request
 
+            //System.out.println(userAgent.json);
             JNode title = userAgent.json.findFirst("title");
+            //System.out.println("Title is " + title.toString());
             return title.toString().toLowerCase();
         }
         catch(JauntException e){
