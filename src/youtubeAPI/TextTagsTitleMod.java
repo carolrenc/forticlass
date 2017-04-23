@@ -82,7 +82,7 @@ public class TextTagsTitleMod {
     public static String classify(String videoURL){
         LinkedList<CatValue> list = new LinkedList<CatValue>();
 
-        String[] info = scraper.getTitleAndTags(scraper.getYoutubeId(videoURL));
+        String[] info = scraper.getTitleAndTags(videoURL);
         if(info[0].equals("ERR")){
             System.out.println("Error detected for " + videoURL);
             return "NA";

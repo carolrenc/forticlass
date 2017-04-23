@@ -15,7 +15,7 @@ public class GoogleSearchMod {
 	    Scraper scraper = new Scraper();
         String category = null;
 	    try{
-	        category = GoogleSearchClassification.classify(scraper.getTitle(scraper.getYoutubeId(video_url)));
+	        category = GoogleSearchClassification.classify(scraper.getTitle(video_url));
         } catch(JauntException e){
             e.printStackTrace();
         }

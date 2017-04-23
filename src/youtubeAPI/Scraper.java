@@ -43,8 +43,12 @@ public class Scraper {
 	}
 
 	// case-insensitivity is important
-	String getTags(String video_id){
+
+    // was id, now url
+	String getTags(String video_url){
 		try{
+		    String video_id = getYoutubeId(video_url);
+		    //String video_id = getYoutubeId(video_url);
 			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
 			userAgent.sendGET("https://www.googleapis.com/youtube/v3/videos?key=" +
 					"AIzaSyAwBpR_XiTmp7mmY3Bgzt0NGpwcLeS5M1Q&fields=items(" +
@@ -55,14 +59,11 @@ public class Scraper {
 			// System.out.println("categoryId: " + categoryId);
 			YoutubeMapping ym= new YoutubeMapping();
 			Map hm= YoutubeMapping.getHm();
-
-
 			// System.out.println("The category is: " + hm.get(categoryId.toInt()));
 
 			JNode tags = userAgent.json.findFirst("tags");
-			//System.out.println("tags: " + tags);
+			System.out.println("tags: " + tags);
 			return tags.toString().toLowerCase();
-
 		}
 		catch(JauntException e){
 			System.err.println(e);
@@ -70,9 +71,10 @@ public class Scraper {
 		return "ERR";
 	}
 
-	String getTitle(String video_id){
+	String getTitle(String video_url){
         String[] retList = {"",""};
         try{
+            String video_id = getYoutubeId(video_url);
             UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
             userAgent.sendGET("https://www.googleapis.com/youtube/v3/videos?key=" +
                     "AIzaSyAwBpR_XiTmp7mmY3Bgzt0NGpwcLeS5M1Q&fields=items(" +
@@ -90,9 +92,10 @@ public class Scraper {
         return "ERR";
     }
 
-	String[] getTitleAndTags(String video_id){
+	String[] getTitleAndTags(String video_url){
 		String[] retList = {"",""};
 		try{
+		    String video_id = getYoutubeId(video_url);
 			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
 			userAgent.sendGET("https://www.googleapis.com/youtube/v3/videos?key=" +
 					"AIzaSyAwBpR_XiTmp7mmY3Bgzt0NGpwcLeS5M1Q&fields=items(" +

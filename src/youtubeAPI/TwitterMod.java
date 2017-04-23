@@ -57,7 +57,7 @@ public class TwitterMod {
 
     public static String classifyTwitterFeed(String url){
         Scraper scraper = new Scraper();
-        String title = scraper.getTitle(scraper.getYoutubeId(url));
+        String title = scraper.getTitle(url);
         List<String> tweets = null;
         try{
             tweets = getTweets(title);
