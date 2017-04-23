@@ -26,6 +26,7 @@ public class TextTagsTitleMod {
     static private List<String> armedForcesWords = null;
     static private List<String> marijuanaWords = null;
     static private List<String> sexEducationWords = null;
+    static private List<String> entertainmentWords = null;
 
     static Scraper scraper = new Scraper();
 
@@ -47,6 +48,7 @@ public class TextTagsTitleMod {
         armedForcesWords = populateList("ArmedForces.txt");
         marijuanaWords = populateList("Marijuana.txt");
         sexEducationWords = populateList("SexEducation.txt");
+        entertainmentWords = populateList("Entertainment.txt");
     }
 
     // working as intended
@@ -102,7 +104,7 @@ public class TextTagsTitleMod {
             //int musicScore = doComparison(parsedTags, musicWords);
             //int cartoonScore = doComparison(parsedTags, cartoonWords);
             int gamingScore = doComparison(parsedTags, gameWords);
-
+            int entertainmentScore = doComparison(parsedTags,entertainmentWords);
             int sportsScore = doComparison(parsedTags, sportsWords);
             int newsMediaScore = doComparison(parsedTags, newsMediaWords);
             int artsandCultureScore = doComparison(parsedTags, artsandCultureWords);
@@ -132,7 +134,7 @@ public class TextTagsTitleMod {
             addToCatValList(list, new CatValue("Armed Forces", armedForcesScore));
             addToCatValList(list, new CatValue("Marijuana", marijuanaScore));
             addToCatValList(list, new CatValue("Sex Education", sexEducationScore));
-
+            addToCatValList(list, new CatValue("Entertainment", entertainmentScore));
 
             Category category = new Category(list.get(0).getCategoryName(), list.get(0).getCategoryValue(),
                     list.get(1).getCategoryName(), list.get(1).getCategoryValue(),
@@ -150,7 +152,7 @@ public class TextTagsTitleMod {
         LinkedList<CatValue> list = new LinkedList<CatValue>();
 
         int gamingScore = doComparison(keywords,gameWords);
-
+        int entertainmentScore = doComparison(keywords,entertainmentWords);
         int sportsScore = doComparison(keywords,sportsWords);
         int newsMediaScore = doComparison(keywords,newsMediaWords);
         int artsandCultureScore = doComparison(keywords,artsandCultureWords);
@@ -177,6 +179,8 @@ public class TextTagsTitleMod {
         addToCatValList(list, new CatValue("Armed Forces", armedForcesScore));
         addToCatValList(list, new CatValue("Marijuana", marijuanaScore));
         addToCatValList(list, new CatValue("Sex Education", sexEducationScore));
+        addToCatValList(list, new CatValue("Entertainment", entertainmentScore));
+
 
         Category category = new Category(list.get(0).getCategoryName(), list.get(0).getCategoryValue(),
                 list.get(1).getCategoryName(), list.get(1).getCategoryValue(),

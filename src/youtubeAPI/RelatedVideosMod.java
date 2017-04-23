@@ -86,6 +86,7 @@ public class RelatedVideosMod {
                     "AIzaSyAwBpR_XiTmp7mmY3Bgzt0NGpwcLeS5M1Q"); //send request
             JNode relatedVideos = userAgent.json;
             JNode relatedVideosArr = relatedVideos.findEach("videoId");
+            //System.out.println(relatedVideosArr.toString());
             return relatedVideosArr.toString();
         }
         catch(JauntException e){
