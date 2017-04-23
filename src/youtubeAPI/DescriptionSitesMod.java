@@ -115,7 +115,7 @@ public class DescriptionSitesMod {
         return expandedURL;
     }
 
-    private static String getRelatedWebsites(String url){
+    public static String getRelatedWebsites(String url){
         Scraper scraper = new Scraper();
 
         String youtubeID = scraper.getYoutubeId(url);
@@ -162,7 +162,7 @@ public class DescriptionSitesMod {
     }
 
     // Just for direct testing
-    private DescriptionSitesMod(){}
+    DescriptionSitesMod(){}
 
     public static void main(String[] args){
         DescriptionSitesMod de = new DescriptionSitesMod();
