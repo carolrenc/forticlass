@@ -135,6 +135,11 @@ public class DescriptionSitesMod {
                 e.printStackTrace();
             }
         }
+
+        /*if(classifications.contains(<<Dangerous_Tags Here>>)){
+            return Dangerous_Tags;
+        }*/
+
         Map<String, Long> occurrences =
                 classifications.stream().collect(Collectors.groupingBy(w  -> w, Collectors.counting()));
 
