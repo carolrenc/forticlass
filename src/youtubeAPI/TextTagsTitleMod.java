@@ -123,11 +123,11 @@ public class TextTagsTitleMod {
         List<String> parsedTags = parseTags(info[1]);
         parsedTags.add(info[0]);
 
-        System.out.println("Printing Tags and Title");
+        /*System.out.println("Printing Tags and Title");
         for(String word:parsedTags){
             System.out.println(word);
         }
-        System.out.println("Done printing Tags and Title");
+        System.out.println("Done printing Tags and Title");*/
 
         if(parsedTags != null) {
 
