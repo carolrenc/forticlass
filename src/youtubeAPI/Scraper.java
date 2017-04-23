@@ -145,9 +145,11 @@ public class Scraper {
 		return "ERR";
 	}
 
-	String getChannelID(String video_id){
+
+	String getChannelID(String video_url){
 		try{
-			UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
+			String video_id = getYoutubeId(video_url);
+		    UserAgent userAgent = new UserAgent(); //create new userAgent (headless browser).
 			userAgent.sendGET("https://www.googleapis.com/youtube/v3/videos?key=" +
 					"AIzaSyAwBpR_XiTmp7mmY3Bgzt0NGpwcLeS5M1Q&fields=items(" +
 					"contentDetails(contentRating),snippet(channelId))" +

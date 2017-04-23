@@ -10,7 +10,7 @@ public class ChannelEvaluationMod {
 
     public static boolean checkChannel(String url){
         Scraper scraper = new Scraper();
-        String channelId = scraper.getChannelID(scraper.getYoutubeId(url));
+        String channelId = scraper.getChannelID(url);
         return scraper.checkIfReasonableChannel(channelId);
     }
 
@@ -28,7 +28,7 @@ public class ChannelEvaluationMod {
 
     public static void ChannelInfo(String url){
         Scraper scraper = new Scraper();
-        String channelId = scraper.getChannelID(scraper.getYoutubeId(url));
+        String channelId = scraper.getChannelID(url);
         System.out.println(channelId);
         System.out.println();
         scraper.getChannelInfo(channelId);
