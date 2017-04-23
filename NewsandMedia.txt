@@ -1,8 +1,9 @@
 news
 cnn
-fox
+fox news
 abc
 cbs
+bbc news
 msnbc
 nbc
 new york times
@@ -12,7 +13,7 @@ the wall street journal
 washington post
 buzzfeed
 newsweek
-time
+time magazine
 u.s. news
 huffington post
 npr
@@ -23,9 +24,11 @@ the new yorker
 slate
 breitbart
 magazine
-issue
+world news
 current affairs
 donald trump
 climate change
 global warming
 election
+aljazeera
+al jazeera

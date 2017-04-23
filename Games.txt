@@ -17,7 +17,6 @@ gamecube
 cards
 esports
 online
-game
 league of legends
 ign
 free games
