@@ -117,7 +117,7 @@ public class TextTagsTitleMod {
         String[] info = scraper.getTitleAndTags(scraper.getYoutubeId(videoURL));
         if(info[0].equals("ERR")){
             System.out.println("Error detected for " + videoURL);
-            return null;
+            return "NA";
         }
 
         List<String> parsedTags = parseTags(info[1]);
@@ -246,5 +246,8 @@ public class TextTagsTitleMod {
 
         System.out.println("\n\n\n");
         System.out.println(classify("https://www.youtube.com/watch?v=itSTzV29bS0"));
+
+        System.out.println("\n\n\n");
+        System.out.println(classify("https://www.youtube.com/watch?v=71KrI-K3PGs"));
     }
 }
