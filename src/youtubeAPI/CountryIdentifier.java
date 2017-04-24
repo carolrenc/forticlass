@@ -75,7 +75,6 @@ public class CountryIdentifier {
   
     	//remember to replace all slashes with %2F
     	getCountry(url);
-    		
     }
 
 }
