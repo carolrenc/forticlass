@@ -2,6 +2,9 @@ package youtubeAPI;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import twitter4j.QueryResult;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -10,6 +13,7 @@ import twitter4j.conf.*;
 
 public class TwitterMod {
 
+	static Logger LOGGER = Logger.getLogger(Logger.class.getName());
 	static Twitter twitter;
 
 	static void setupTwitter() throws IOException
@@ -46,6 +50,8 @@ public class TwitterMod {
 		} catch (TwitterException te) {
 			te.printStackTrace();
 			System.out.println("Failed to search tweets: " + te.getMessage());
+			LOGGER.log(Level.SEVERE, "an exception was thrown", te);
+			
 		}
 		return list;
 	}
@@ -57,12 +63,14 @@ public class TwitterMod {
 
     public static String classifyTwitterFeed(String url){
         Scraper scraper = new Scraper();
-        String title = scraper.getTitle(url);
+        //String title = scraper.getTitle(url);
+        String title= "s djjjebxfhdhbhjdbjbdhabashjbfhebhfbhjsbdjkcd m";
         List<String> tweets = null;
         try{
             tweets = getTweets(title);
         } catch (Exception e){
             e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "an exception was thrown", e);
         }
         String category = getCategoryFromTweets(tweets);
         return category;

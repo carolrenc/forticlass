@@ -3,6 +3,9 @@
  */
 package youtubeAPI;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.jaunt.JauntException;
 
 /**
@@ -10,6 +13,8 @@ import com.jaunt.JauntException;
  *
  */
 public class GoogleSearchMod {
+	
+	static Logger LOGGER = Logger.getLogger(Logger.class.getName());
 
 	public static void getClassification(String video_url){
 	    Scraper scraper = new Scraper();
@@ -18,6 +23,7 @@ public class GoogleSearchMod {
 	        category = GoogleSearchClassification.classify(scraper.getTitle(video_url));
         } catch(JauntException e){
             e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "an exception was thrown in GoogleSearchMod getClassification ", e);
         }
 
         System.out.println(category);
@@ -33,6 +39,7 @@ public class GoogleSearchMod {
 			System.out.print("\n\nFinal Classification: " + result);
 		} catch (JauntException e) {
 			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "an exception was thrown in GoogleSearchMod main", e);
 		}
 	}
 

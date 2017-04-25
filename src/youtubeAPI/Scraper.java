@@ -2,12 +2,16 @@ package youtubeAPI;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.jaunt.*;
 
 import twitter4j.TwitterException;
 
 public class Scraper {
+	
+	static Logger LOGGER = Logger.getLogger(Logger.class.getName());
 
 	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) throws NotFound, IOException {
@@ -38,6 +42,7 @@ public class Scraper {
 			  	
 			  }
 		  catch(JauntException e){
+			  LOGGER.log(Level.SEVERE, "an exception was thrown", e);
 				  System.err.println(e);
 		  }
 	}
@@ -67,6 +72,7 @@ public class Scraper {
 		}
 		catch(JauntException e){
 			System.err.println(e);
+			LOGGER.log(Level.SEVERE, "an exception was thrown", e);
 		}
 		return "ERR";
 	}
@@ -88,6 +94,7 @@ public class Scraper {
         }
         catch(JauntException e){
             System.err.println(e);
+            LOGGER.log(Level.SEVERE, "an exception was thrown", e);
         }
         return "ERR";
     }
@@ -121,6 +128,7 @@ public class Scraper {
 		}
 		catch(JauntException e){
 			System.err.println(e);
+			LOGGER.log(Level.SEVERE, "an exception was thrown", e);
 		}
 		retList[0] = "ERR";
 		retList[1] = "ERR";
@@ -141,6 +149,7 @@ public class Scraper {
 		}
 		catch(JauntException e){
 			System.err.println(e);
+			LOGGER.log(Level.SEVERE, "an exception was thrown", e);
 		}
 		return "ERR";
 	}
@@ -161,6 +170,7 @@ public class Scraper {
 		}
 		catch(JauntException e){
 			System.err.println(e);
+			LOGGER.log(Level.SEVERE, "an exception was thrown", e);
 		}
 		return "ERR";
 	}
@@ -187,6 +197,7 @@ public class Scraper {
 		}
 		catch(JauntException e){
 			System.err.println(e);
+			LOGGER.log(Level.SEVERE, "an exception was thrown", e);
 		}
 
 		return "ERR";
@@ -220,6 +231,7 @@ public class Scraper {
         }
         catch(JauntException e){
             System.err.println(e);
+            LOGGER.log(Level.SEVERE, "an exception was thrown", e);
         }
 
         return true;
@@ -238,6 +250,7 @@ public class Scraper {
 		}
 		catch(JauntException e){
 			System.err.println(e);
+			LOGGER.log(Level.SEVERE, "an exception was thrown", e);
 		}
 		return null;
 	}
@@ -255,6 +268,7 @@ public class Scraper {
 		}
 		else{
 			System.out.println("Improper video - must be youtube video url");
+			LOGGER.log(Level.SEVERE, "Improper video - must be youtube video url");
 			return "ERR";
 		}
 		return "ERR";
@@ -266,6 +280,7 @@ public class Scraper {
 		} catch (TwitterException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, "an exception was thrown", e);
 		}
 	}
 }

@@ -7,12 +7,17 @@ import com.jaunt.UserAgent;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
  * Created by ericmilton on 4/10/17.
  */
 public class RelatedVideosMod {
+	
+	static Logger LOGGER = Logger.getLogger(Logger.class.getName());
+	
     public static String getYoutubeId(String urlName){
         if(urlName.contains("youtube") && urlName.contains("watch?v"))
             return urlName.substring(urlName.length() - 11);
@@ -59,6 +64,7 @@ public class RelatedVideosMod {
             }
             catch(Exception e){
                 System.out.println("Error in RelatedVideosMod");
+                LOGGER.log(Level.SEVERE, "an exception was thrown in RelatedVideosMod", e);
                 e.printStackTrace();
             }
         }
@@ -91,6 +97,7 @@ public class RelatedVideosMod {
         }
         catch(JauntException e){
             System.err.println("Error in function: getRelatedVideos");
+            LOGGER.log(Level.SEVERE, "an exception was thrown in getRelatedVideos", e);
             System.err.println(e);
         }
         return null;

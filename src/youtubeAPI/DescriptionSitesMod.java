@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
  */
 public class DescriptionSitesMod {
     // www.ietf.org/rfc/rfc1738.txt hsa characters that are reserved
+	static Logger LOGGER = Logger.getLogger(Logger.class.getName());
+	
     private static boolean isASite(String item){
         if(item.length() < 3){
             return false;
@@ -64,7 +68,7 @@ public class DescriptionSitesMod {
         } catch (MalformedURLException e) {
             //System.err.println("Error in function: getURLsFromDescription");
             //e.printStackTrace();
-
+        	LOGGER.log(Level.SEVERE, "an exception was thrown getURLsFromDescription", e);
             //these are to remain ignored, as they are essentially just making bad URLs to check
         }
         try {
@@ -91,6 +95,7 @@ public class DescriptionSitesMod {
         catch(Exception e){
             System.err.println("Error in function: getURLsFromDescription");
             e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "an exception was thrown in getURLsFromDescription ", e);
         }
 
         if(urls.size() == 0){
@@ -133,6 +138,7 @@ public class DescriptionSitesMod {
             } catch (Exception e){
                 System.err.println("Error in function: getRelatedWebsites");
                 e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "an exception was thrown in getRelatedWebsites ", e);
             }
         }
 
