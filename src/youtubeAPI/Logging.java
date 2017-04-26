@@ -39,7 +39,19 @@ public class Logging {
         Exception e1 = new Exception();
         Exception e2 = new Exception(e1);
         LOGGER.log(Level.SEVERE, "an exception was thrown", e2);
-}
+	}
+	
+	Logging() {
+		try {
+			setupLogger();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 	
 	
 	public static void main(String[] args) throws SecurityException, IOException{

@@ -4,12 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by ericmilton on 3/20/17.
  */
 public class TextTagsTitleMod {
 
+	static Logger LOGGER = Logger.getLogger(Logger.class.getName());
     //static private List<String> musicWords = null;
     //static private List<String> cartoonWords = null;
 
@@ -87,6 +90,7 @@ public class TextTagsTitleMod {
         String[] info = scraper.getTitleAndTags(videoURL);
         if(info[0].equals("ERR")){
             System.out.println("Error detected for " + videoURL);
+            LOGGER.log(Level.SEVERE, "Error detected for ", videoURL);
             return "NA";
         }
 
@@ -144,6 +148,7 @@ public class TextTagsTitleMod {
             return category.getPrimaryCategory();
         } else{
             System.out.println("NULL ISSUE IN TEXTTITLTETAGESFD");
+            LOGGER.log(Level.SEVERE, "NULL ISSUE IN TEXTTITLTETAGESFD ");
             return "ERR";
         }
     }
